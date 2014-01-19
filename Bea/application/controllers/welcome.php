@@ -20,11 +20,6 @@ class Welcome extends CI_Controller
      */
     public function index()
     {
-        $m = new MongoClient();
-        $db = $m->selectCollection("pos", "users");
-        echo 'Hello madam satyabama';
-        print_r($db);
-        exit;
         $this->load->view('welcome_message');
     }
 }
