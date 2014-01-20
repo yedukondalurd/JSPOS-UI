@@ -43,13 +43,14 @@ define(function (require) {
             _manageStock.init();
         },
         manageSideMenuStyles: function (currentView) {
-            $('.side-menu').find('li').removeClass('current');
-            if ($('#' + currentView).length !== 0) {
-                $('#' + currentView).addClass('current');
-            } else {
-                alert("Current Route Id Doesn't exist")
+            if (currentView) {
+                if ($('li.' + currentView).length !== 0) {
+                    $('.side-menu').find('li').removeClass('current');
+                    $('li.' + currentView).addClass('current');
+                } else {
+                    alert("Current Route Id Doesn't exist")
+                }
             }
-
         }
 
     });
