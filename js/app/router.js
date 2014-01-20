@@ -6,7 +6,9 @@ define(function (require) {
 
         routes: {
             "login": "login",
+            "manage-stock": "manageStock",
             "*default": "dashboard"
+
         },
         before: function () {
             //var Authentication = require('app/authentication');
@@ -33,8 +35,14 @@ define(function (require) {
             var Dashboard = require('views/dashboard');
             var _dashboard = new Dashboard();
             _dashboard.init();
+        },
+        manageStock: function () {
+            var ManageStock = require('views/manageStock/manageStock');
+            var _manageStock = new ManageStock();
+            _manageStock.init();
         }
 
     });
     return router;
-});
+})
+;
