@@ -20,6 +20,7 @@ define(function (require) {
              } else {*/
             var _mainWrapper = require('views/mainWrapper');
             _mainWrapper.init();
+            this.manageSideMenuStyles(Backbone.history.fragment);
             /* Backbone.history.navigate('dashboard', {trigger: true});
              }
              });*/
@@ -40,6 +41,15 @@ define(function (require) {
             var ManageStock = require('views/manageStock/manageStock');
             var _manageStock = new ManageStock();
             _manageStock.init();
+        },
+        manageSideMenuStyles: function (currentView) {
+            $('.side-menu').find('li').removeClass('current');
+            if ($('#' + currentView).length !== 0) {
+                $('#' + currentView).addClass('current');
+            } else {
+                alert("Current Route Id Doesn't exist")
+            }
+
         }
 
     });

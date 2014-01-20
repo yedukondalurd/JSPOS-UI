@@ -10,13 +10,15 @@ define(function (require) {
     var sideBarNavigation = require('text!tpl/sideMenu.html');
     var mainWrapperView = Backbone.View.extend({
         $wrapperElement: 'body',
-        $sidebarSelector: '#side-bat-navigation',
+        $sidebarSelector: '#side-bar-navigation',
         init: function () {
             var _ = require('underscore');
-            var wrapperTemplate = _.template(mainWrapper);
-            var sidebarTemplate = _.template(sideBarNavigation);
-            $(this.$wrapperElement).empty().html(wrapperTemplate());
-            $(this.$sidebarSelector).html(sidebarTemplate());
+            if (!$('.main-wrapper').html()) {
+                var wrapperTemplate = _.template(mainWrapper);
+                var sidebarTemplate = _.template(sideBarNavigation);
+                $(this.$wrapperElement).html(wrapperTemplate());
+                $(this.$sidebarSelector).html(sidebarTemplate());
+            }
         }
     });
     return new mainWrapperView();
