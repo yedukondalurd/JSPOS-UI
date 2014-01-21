@@ -4,10 +4,10 @@
 define(function (require) {
     "use strict";
     var urls = {
-        login: {
-            checkSession: "session.php?method=''",
-            loginUser: "session.php?method=login",
-            logoutUser: "session.php?method=logout"
+        auth: {
+            checkSession: "bea/auth/checkSession",
+            loginUser: "bea/auth/login",
+            logoutUser: "bea/auth/logout"
         }
     };
     return urls;

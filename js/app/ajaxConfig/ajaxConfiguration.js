@@ -7,35 +7,35 @@ define(function (require) {
         var self = this;
         var AjaxOptions = require('app/ajaxConfig/ajaxOptions');
         var _ajaxSettings = new AjaxOptions();
-        var Authentication = require('app/authentication');
+        //var Authentication = require('app/authentication');
         var Url = require('app/ajaxConfig/urls');
-        self.authApp = function (method) {
-            var loginUrl = Url.login;
+        self.authApp = function (method, data) {
+            var auth = Url.auth;
             var url;
-            var method = 'POST';
+            var type = 'POST';
             if (method === 'login') {
-                url = loginUrl.loginUser;
+                url = auth.loginUser;
             } else if (method === 'logout') {
-                url = loginUrl.logoutUser;
+                url = auth.logoutUser;
             } else {
-                url = loginUrl.checkSession;
+                url = auth.checkSession;
             }
-            return _sendRequest(url, method);
+            return _sendRequest(url, type, data);
         };
         var _sendRequest = function (url, method, requestData, contentType) {
             var def = $.Deferred();
             _ajaxSettings.url = url;
             _ajaxSettings.type = method;
             _ajaxSettings.data = requestData || '';
-            _ajaxSettings.contentType = contentType || 'application/json';
+            //_ajaxSettings.contentType = contentType || 'application/json';
             _ajaxSettings.success = function (response, status, xhr) {
-                var response = $.parseJSON(response);
-                console.log(response.status);
-                if (response.status === 0) {
+                //var response = $.parseJSON(response);
+                console.log(response);
+                /*if (response.statusCode === 0) {
                     Authentication.showLoginScreen();
                 } else {
                     def.resolve(response);
-                }
+                }*/
             };
             $.ajax(_ajaxSettings);
             return def;

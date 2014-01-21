@@ -7,7 +7,7 @@ define(function (require) {
         var self = this;
         self.url = '';
         self.type = '';
-        self.contentType = '';
+        //self.contentType = '';
         self.data = {};
         self.cache = false;
         self.async = true;
