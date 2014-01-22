@@ -7,7 +7,6 @@ define(function (require) {
         var self = this;
         var AjaxOptions = require('app/ajaxConfig/ajaxOptions');
         var _ajaxSettings = new AjaxOptions();
-        //var Authentication = require('app/authentication');
         var Url = require('app/ajaxConfig/urls');
         self.authApp = function (method, data) {
             var auth = Url.auth;
@@ -27,15 +26,9 @@ define(function (require) {
             _ajaxSettings.url = url;
             _ajaxSettings.type = method;
             _ajaxSettings.data = requestData || '';
-            //_ajaxSettings.contentType = contentType || 'application/json';
             _ajaxSettings.success = function (response, status, xhr) {
-                //var response = $.parseJSON(response);
-                console.log(response);
-                /*if (response.statusCode === 0) {
-                    Authentication.showLoginScreen();
-                } else {
-                    def.resolve(response);
-                }*/
+                var response = $.parseJSON(response);
+                def.resolve(response);
             };
             $.ajax(_ajaxSettings);
             return def;

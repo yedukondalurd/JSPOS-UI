@@ -8,8 +8,8 @@ define(function (require) {
     var Backbone = require('backbone');
     var _ = require('underscore');
     var Login = require('text!tpl/login.html');
-    var Auth = require('app/ajaxConfig/ajaxConfiguration');
-    return Backbone.View.extend({
+    var AjaxConfig = require('app/ajaxConfig/ajaxConfiguration');
+    var login = Backbone.View.extend({
         el: 'body',
         template: _.template(Login),
         events: {
@@ -23,16 +23,18 @@ define(function (require) {
             return this;
         },
         loginUser: function (e) {
-            console.log('Login submitted');
-            //console.log($('form.login-form', this.$el).serialize());
             var serData = $('form.login-form', this.$el).serialize();
-            console.log(serData);
-            var _auth = new Auth();
-            var loggedIn = _auth.authApp('login', serData);
-            //console.log(loggedIn);
+            var _ajaxConfig = new AjaxConfig();
+            var loggedIn = _ajaxConfig.authApp('login', serData);
+            loggedIn.done(function (response) {
+                if (response.status === 'success') {
+                    Backbone.history.navigate('dashboard', {trigger: true});
+                }
+            }).fail(function (err) {
+                    console.log(err);
+                });
             return false;
         }
-
     });
-
+    return new login();
 });

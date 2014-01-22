@@ -7,48 +7,37 @@ define(function (require) {
     var Backbone = require('backbone');
     var UserModel = require('models/users/user');
     var _userModel = new UserModel();
+    var AjaxConfig = require('app/ajaxConfig/ajaxConfiguration');
+    var _ajaxConfig = new AjaxConfig();
     var AuthenticationModel = Backbone.Model.extend({
-        isAuthenticated: true,
-        loginStage: '',
-        isStarting: true,
         initialize: function () {
             if (typeof(Storage) !== "undefined") {
                 this.supportStorage = true;
             }
         },
         showLoginScreen: function () {
-            console.log('Show login screen');
+
         },
         checkAuth: function () {
-            var self = this;
-            var AjaxRequest = require('app/ajaxConfig/ajaxConfiguration');
-            var _ajaxRequest = new AjaxRequest();
-            _ajaxRequest.authApp('').done(function (response) {
-                self.isAuthenticated = true;
-            });
+            var checkSession = _ajaxConfig.authApp('checkSession', '');
+            return checkSession;
         },
         getAuth: function (callback) {
-            var self = this;
-            this.checkAuth();
-            if (!self.isAuthenticated) {
-                if (!self.isStarting) {
-                    self.loginStage = 'already_started';
-                } else {
-                    self.isStarting = false;
-                    self.loginStage = 'starting';
+
+        },
+        showLoginPage: function () {
+            var Login = require('views/login');
+            Login.init();
+        },
+        logoutUser: function () {
+            var logout = _ajaxConfig.authApp('logout', '');
+            logout.done(function (response) {
+                if (response.status === 'success') {
+                    Backbone.history.navigate('login', {trigger: true});
                 }
-            }
-            callback(self.loginStage);
-
-            /*var self = this;
-             var userExists = _userModel.isUserExists('yedukondalurd@gmail.com', '123456');
-
-             userExists.done(function (response) {
-             self.isAuthenticated = true;
-             }).fail(function (response) {
-             self.isAuthenticated = false;
-             });
-             callback(self.isAuthenticated);*/
+            }).fail(function (err) {
+                    Backbone.history.navigate('dashboard', {trigger: true});
+                });
         }
     });
 

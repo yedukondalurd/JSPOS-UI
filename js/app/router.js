@@ -2,35 +2,42 @@ define(function (require) {
 
     "use strict";
     var BaseRouter = require('app/baseRoute');
+    var Authentication = require('app/authentication');
     var router = BaseRouter.extend({
 
         routes: {
-            "login": "login",
+            "login": "auth",
+            "logout": "auth",
             "manage-stock": "manageStock",
             "*default": "dashboard"
 
         },
         before: function () {
-            //var Authentication = require('app/authentication');
-            /*Authentication.getAuth(function (response) {
-             router.__super__.stopNavigation = true;
-             if (response === 'starting') {
-             Backbone.history.navigate('login', {trigger: true});
-             } else if (response === 'already_started') {
-             } else {*/
-            var _mainWrapper = require('views/mainWrapper');
-            _mainWrapper.init();
-            this.manageSideMenuStyles(Backbone.history.fragment);
-            /* Backbone.history.navigate('dashboard', {trigger: true});
-             }
-             });*/
+            var self = this;
+            if (Backbone.history.fragment !== "logout") {
+                var checkSession = Authentication.checkAuth();
+                checkSession.done(function (response) {
+                    if (response.status === 'auth error' && Backbone.history.fragment !== "login") {
+                        Backbone.history.navigate('login', {trigger: true});
+                    }
+                }).fail(function (err) {
+                        if (Backbone.history.fragment !== "login") {
+                            Backbone.history.navigate('login', {trigger: true});
+                        }
+                    });
+                var _mainWrapper = require('views/mainWrapper');
+                _mainWrapper.init();
+                self.manageSideMenuStyles(Backbone.history.fragment);
+            }
         },
         after: function () {
         },
-        login: function () {
-            var Login = require('views/login');
-            var _login = new Login();
-            _login.init();
+        auth: function () {
+            if (Backbone.history.fragment === "login") {
+                Authentication.showLoginPage();
+            } else if (Backbone.history.fragment === "logout") {
+                Authentication.logoutUser();
+            }
         },
         dashboard: function () {
             var Dashboard = require('views/dashboard');
@@ -48,7 +55,7 @@ define(function (require) {
                     $('.side-menu').find('li').removeClass('current');
                     $('li.' + currentView).addClass('current');
                 } else {
-                    alert("Current Route Id Doesn't exist")
+
                 }
             }
         }
