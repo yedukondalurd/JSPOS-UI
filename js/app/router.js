@@ -19,6 +19,8 @@ define(function (require) {
                 checkSession.done(function (response) {
                     if (response.status === 'auth error' && Backbone.history.fragment !== "login") {
                         Backbone.history.navigate('login', {trigger: true});
+                    } else if (response.status === 'success' && Backbone.history.fragment === "login") {
+                        Backbone.history.navigate('dashboard', {trigger: true});
                     }
                 }).fail(function (err) {
                         if (Backbone.history.fragment !== "login") {
