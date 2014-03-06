@@ -459,6 +459,7 @@ table.fc-border-separate {
 
 .fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg {
     display: none\9
+
 }
 
 .fc-event-vert .ui-resizable-s {
@@ -14038,41 +14039,6 @@ table .checkbox {
     color: #3F3E38
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .spinner {
     display: inline-block;
     opacity: 0;
@@ -14085,7 +14051,7 @@ table .checkbox {
 }
 
 .has-spinner.active {
-    cursor:progress;
+    cursor: progress;
 }
 
 .has-spinner.active .spinner {
@@ -14107,4 +14073,18 @@ table .checkbox {
 
 .has-spinner.btn-large.active .spinner {
     width: 19px;
+}
+
+.sales {
+    color: #fff;
+}
+
+.sale-item-listing {
+    padding: 0px;
+    height: 200px;
+    margin: 10px 15px 0px;
+}
+
+.sale-item-listing table {
+    width: 100%;
 }

@@ -7,12 +7,12 @@ define(function (require) {
     var Backbone = require('backbone');
     var sale = require('text!tpl/sale/index.html');
     return Backbone.View.extend({
-        $contentSelector: '#application-content-host',
+        $contentSelector: '.main-wrapper',
         init: function () {
-            console.log('Manage stock initialized');
+            console.log('Sales initialized');
             var _ = require('underscore');
-            var manageStockTemplate = _.template(manageStock);
-            $(this.$contentSelector).html(manageStockTemplate());
+            var saleTemplate = _.template(sale);
+            $(this.$contentSelector).html(saleTemplate());
         }
     });
 });
