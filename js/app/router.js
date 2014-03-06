@@ -9,6 +9,7 @@ define(function (require) {
             "login": "auth",
             "logout": "auth",
             "manage-stock": "manageStock",
+            "sale": "sale",
             "*default": "dashboard"
 
         },
@@ -23,10 +24,10 @@ define(function (require) {
                         Backbone.history.navigate('dashboard', {trigger: true});
                     }
                 }).fail(function (err) {
-                        if (Backbone.history.fragment !== "login") {
-                            Backbone.history.navigate('login', {trigger: true});
-                        }
-                    });
+                    if (Backbone.history.fragment !== "login") {
+                        Backbone.history.navigate('login', {trigger: true});
+                    }
+                });
                 var _mainWrapper = require('views/mainWrapper');
                 _mainWrapper.init();
                 self.manageSideMenuStyles(Backbone.history.fragment);
@@ -50,6 +51,11 @@ define(function (require) {
             var ManageStock = require('views/manageStock/manageStock');
             var _manageStock = new ManageStock();
             _manageStock.init();
+        },
+        sale: function () {
+            var Sale = require('views/sale/sale');
+            var _sale = new Sale();
+            _sale.init();
         },
         manageSideMenuStyles: function (currentView) {
             if (currentView) {

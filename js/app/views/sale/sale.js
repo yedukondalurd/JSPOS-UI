@@ -5,7 +5,7 @@ define(function (require) {
     "use strict";
     var $ = require('jquery');
     var Backbone = require('backbone');
-    var manageStock = require('text!tpl/manage-stock/index.html');
+    var sale = require('text!tpl/sale/index.html');
     return Backbone.View.extend({
         $contentSelector: '#application-content-host',
         init: function () {
@@ -13,11 +13,6 @@ define(function (require) {
             var _ = require('underscore');
             var manageStockTemplate = _.template(manageStock);
             $(this.$contentSelector).html(manageStockTemplate());
-            require('dataTables');
-            $(".datatable").dataTable({aoColumnDefs: [
-                {bSortable: !1, aTargets: [0, 6]}
-            ], aaSorting: []});
         }
-
     });
 });

@@ -30,7 +30,8 @@ define(function (require) {
                 var response = $.parseJSON(response);
                 def.resolve(response);
             };
-            $.ajax(_ajaxSettings);
+            def.reject();
+            //$.ajax(_ajaxSettings);
             return def;
         };
     };
