@@ -23,18 +23,14 @@ define(function (require) {
             return this;
         },
         loginUser: function (e) {
-            var loader = Ladda.create(e.target);
-            loader.start();
             var serData = $('form.login-form', this.$el).serialize();
             var _ajaxConfig = new AjaxConfig();
             var loggedIn = _ajaxConfig.authApp('login', serData);
             loggedIn.done(function (response) {
-                loader.stop();
                 if (response.status === 'success') {
                     Backbone.history.navigate('dashboard', {trigger: true});
                 }
             }).fail(function (err) {
-                    loader.stop();
                     console.log(err);
                 });
             return false;

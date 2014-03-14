@@ -31,7 +31,7 @@ define(function (require) {
                 def.resolve(response);
             };
             def.reject();
-            //$.ajax(_ajaxSettings);
+            $.ajax(_ajaxSettings);
             return def;
         };
     };

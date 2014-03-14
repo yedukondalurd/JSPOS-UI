@@ -11,23 +11,24 @@ define(function (require) {
             "manage-stock": "manageStock",
             "sale": "sale",
             "*default": "dashboard"
-
         },
         before: function () {
             var self = this;
             if (Backbone.history.fragment !== "logout") {
-                var checkSession = Authentication.checkAuth();
-                checkSession.done(function (response) {
-                    if (response.status === 'auth error' && Backbone.history.fragment !== "login") {
-                        Backbone.history.navigate('login', {trigger: true});
-                    } else if (response.status === 'success' && Backbone.history.fragment === "login") {
-                        Backbone.history.navigate('dashboard', {trigger: true});
-                    }
-                }).fail(function (err) {
-                    if (Backbone.history.fragment !== "login") {
-                        Backbone.history.navigate('login', {trigger: true});
-                    }
-                });
+                /*var checkSession = Authentication.checkAuth();
+                 checkSession.done(function (response) {
+                 console.log(response);
+                 if (response.status === 'auth error' && Backbone.history.fragment !== "login") {
+                 Backbone.history.navigate('login', {trigger: true});
+                 } else if (response.status === 'success' && Backbone.history.fragment === "login") {
+                 Backbone.history.navigate('dashboard', {trigger: true});
+                 }
+                 }).fail(function (err) {
+                 console.log(err);
+                 if (Backbone.history.fragment !== "login") {
+                 Backbone.history.navigate('login', {trigger: true});
+                 }
+                 });*/
                 var _mainWrapper = require('views/mainWrapper');
                 _mainWrapper.init();
                 self.manageSideMenuStyles(Backbone.history.fragment);
