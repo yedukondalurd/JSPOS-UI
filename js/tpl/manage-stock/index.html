@@ -23,44 +23,36 @@
                 <th>
                     <div class="checkbox"><input type="checkbox"/></div>
                 </th>
-                <th><%= fields[0]%></th>
-                <th><%= fields[1]%></th>
-                <th><%= fields[2]%></th>
-                <th><%= fields[3]%></th>
-                <th><%= fields[4]%></th>
-                <th><%= fields[5]%></th>
+                <th><%= items.fields[0]%></th>
+                <th><%= items.fields[1]%></th>
+                <th><%= items.fields[2]%></th>
+                <th><%= items.fields[3]%></th>
+                <th><%= items.fields[4]%></th>
+                <th><%= items.fields[5]%></th>
             </tr>
             </thead>
             <tbody>
-            <% _.each(data,function(item){%>
-            <tr>
-                <td>
-                    <div class="checkbox"><input type="checkbox"/></div>
-                </td>
-                <td><%= item['id']%></td>
-                <td><%= item['item_name']%></td>
-                <td><%= item['item_supplier']%></td>
-                <td><%= item['item_category']%></td>
-                <td><%= item['stock']%></td>
-                <td class="text-right">
-                    <a href="#" class="btn btn-default btn-xs"><i class="icon-pencil"></i> edit</a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>
-                </td>
-            </tr>
+            <% _.each(items.data,function(item){%>
+            <%= itemTemplate(item) %>
             <%});%>
             </tbody>
         </table>
-        <div id="loginDialog" title="Login">
-            <form>
-                <fieldset>
-                    <label for="user">User</label>
-                    <input type="text" name="user" id="user" class="text ui-widget-content ui-corner-all" />
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all" />
-                </fieldset>
+        <div id="add-item-form" title="Add Item">
+            <form action="" method="post">
+                <label for="item_code">Item Code:</label>
+                <input type="text" name="item_code" id="item_code" class="text ui-widget-content ui-corner-all"/>
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name" id="item_name" class="text ui-widget-content ui-corner-all"/>
+                <label for="item_cost">Item Cost:</label>
+                <input type="text" name="item_cost" id="item_cost" class="text ui-widget-content ui-corner-all"/>
+                <label for="item_category">Item Category:</label>
+                <input type="text" name="item_category" id="item_category"
+                       class="text ui-widget-content ui-corner-all"/>
+                <label for="item_supplier">Item Supplier:</label>
+                <input type="text" name="item_supplier" id="item_supplier"
+                       class="text ui-widget-content ui-corner-all"/>
             </form>
         </div>
 
     </div>
 </div>
-

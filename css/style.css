@@ -14088,3 +14088,12 @@ table .checkbox {
 .sale-item-listing table {
     width: 100%;
 }
+
+.ui-dialog form label {
+    width: 120px;
+}
+
+.ui-dialog form input[type=text] {
+    width: 210px;
+    outline: none;
+}
