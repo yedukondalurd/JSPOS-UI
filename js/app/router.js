@@ -9,11 +9,16 @@ define(function (require) {
             "login": "auth",
             "logout": "auth",
             "manage-stock": "manageStock",
+            "categories": "categories",
+            "suppliers": "suppliers",
             "sale": "sale",
             "*default": "dashboard"
         },
+        historyArray: [],
         before: function () {
             var self = this;
+            self.historyArray.push(Backbone.history.fragment);
+            self.cleaPrevView();
             if (Backbone.history.fragment !== "logout") {
                 /*var checkSession = Authentication.checkAuth();
                  checkSession.done(function (response) {
@@ -36,6 +41,10 @@ define(function (require) {
         },
         after: function () {
         },
+        previous: function () {
+            var self = this;
+            return self.historyArray[self.historyArray.length - 2];
+        },
         auth: function () {
             if (Backbone.history.fragment === "login") {
                 Authentication.showLoginPage();
@@ -53,10 +62,41 @@ define(function (require) {
             var _manageStock = new ManageStock();
             _manageStock.init();
         },
+        categories: function () {
+            var Categories = require('views/categories/itemCategories');
+            var _categories = new Categories();
+            _categories.init();
+        },
+        suppliers: function () {
+            var Suppliers = require('views/suppliers/itemSuppliers');
+            var _suppliers = new Suppliers();
+            _suppliers.init();
+        },
         sale: function () {
             var Sale = require('views/sale/sale');
             var _sale = new Sale();
             _sale.init();
+        },
+        cleaPrevView: function () {
+            var self = this;
+            switch (self.previous()) {
+                case 'manage-stock':
+                    var ManageStock = require('views/manageStock/manageStock');
+                    var _manageStock = new ManageStock();
+                    _manageStock.cleanup();
+                    break;
+                case 'categories':
+                    var Categories = require('views/categories/itemCategories');
+                    var _categories = new Categories();
+                    _categories.cleanup();
+                    break;
+                case 'suppliers':
+                    var Suppliers = require('views/suppliers/itemSuppliers');
+                    var _suppliers = new Suppliers();
+                    _suppliers.cleanup();
+                    break;
+                default :
+            }
         },
         manageSideMenuStyles: function (currentView) {
             if (currentView) {

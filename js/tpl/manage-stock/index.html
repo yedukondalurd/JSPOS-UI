@@ -13,6 +13,8 @@
     </ol>
     <ol class="item_buttons breadcrumb">
         <li><a href="#" class="add_item_button">Add Item</a></li>
+        <li><a href="#categories" class="item_category_button">Categories</a></li>
+        <li><a href="#suppliers" class="item_supplier_button">Suppliers</a></li>
     </ol>
     <div class="main-content">
 
@@ -37,7 +39,7 @@
             <%});%>
             </tbody>
         </table>
-        <div id="add-item-form" title="Add Item">
+        <div id="add-item-form" title="Add Item" class="hide-this">
             <form action="" method="post">
                 <label for="item_code">Item Code:</label>
                 <input type="text" name="item_code" id="item_code" class="text ui-widget-content ui-corner-all"/>

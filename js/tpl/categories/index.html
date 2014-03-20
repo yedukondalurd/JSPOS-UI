@@ -1,0 +1,51 @@
+<div class="content-inner">
+    <div class="page-header">
+        <div class="header-links hidden-xs">
+            <a href="#notifications"><i class="icon-comments"></i> User Alerts</a>
+            <a href="#settings"><i class="icon-cog"></i> Settings</a>
+            <a href="#logout"><i class="icon-signout"></i> Logout</a>
+        </div>
+        <h1><i class="icon-bar-chart"></i> Manage Categories</h1>
+    </div>
+    <ol class="breadcrumb">
+        <li><a href="#dashboard">Home</a></li>
+        <li class="active">Example</li>
+    </ol>
+    <ol class="category_buttons breadcrumb">
+        <li><a href="#" class="add_item_category_button">Add Category</a></li>
+        <li><a href="#manage-stock" class="manage_stock_button">Manage Stock</a></li>
+        <li><a href="#suppliers" class="item_supplier_button">Suppliers</a></li>
+    </ol>
+    <div class="main-content">
+
+
+        <table class="datatable table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>
+                    <div class="checkbox"><input type="checkbox"/></div>
+                </th>
+                <th><%= categories.fields[0]%></th>
+                <th><%= categories.fields[1]%></th>
+                <th><%= categories.fields[2]%></th>
+                <th><%= categories.fields[3]%></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% _.each(categories.data,function(item){%>
+            <%= categoryTemplate(item) %>
+            <%});%>
+            </tbody>
+        </table>
+        <div id="item-categories-form" title="Add Category" class="hide-this">
+            <form action="" method="post">
+                <label for="item_category_name">Category Name:</label>
+                <input type="text" name="item_category_name" id="item_category_name"
+                       class="text ui-widget-content ui-corner-all"/>
+                <label for="item_category_status">Status:</label>
+                <input type="text" name="item_category_status" id="item_category_status"
+                       class="text ui-widget-content ui-corner-all"/>
+            </form>
+        </div>
+    </div>
+</div>

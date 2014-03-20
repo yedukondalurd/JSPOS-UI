@@ -1,4 +1,7 @@
 /**
+ * Created by kondalu on 3/18/14.
+ */
+/**
  * Created by yedukondalu.v on 1/20/14.
  */
 define(function (require) {
@@ -6,23 +9,23 @@ define(function (require) {
     var $ = require('jquery');
     var Backbone = require('backbone');
     var _ = require('underscore');
-    var manageStock = require('text!tpl/manage-stock/index.html');
-    var itemHtml = require('text!tpl/manage-stock/add/index.html');
+    var categories_html = require('text!tpl/categories/index.html');
+    var add_row_html = require('text!tpl/categories/add_row.html');
     return Backbone.View.extend({
         events: {
-            "click .item_buttons .add_item_button": "addItem"
+            "click .category_buttons .add_item_category_button": "addCategory"
         },
         el: '#application-content-host',
-        template: _.template(manageStock),
-        itemTemplate: _.template(itemHtml),
+        template: _.template(categories_html),
+        categoryTemplate: _.template(add_row_html),
         init: function () {
             var self = this;
-            console.log('Manage stock initialized');
+            console.log('Categories initialized');
             var tableCollection = {};
-            tableCollection.fields = ['ID', 'Item Name', 'Item Supplier', 'Item Category', 'Stock', 'Action'];
+            tableCollection.fields = ['ID', 'Category Name', 'Status', 'Action'];
             tableCollection.data = [
-                {"id": "1", "item_name": "Dove Hair Therapy", "item_supplier": "Dove", "item_category": "Shampoo", "stock": "2"},
-                {'id': '2', 'item_name': 'Clinic Plus Hair Therapy', 'item_supplier': 'Clinic Plus', 'item_category': 'Shampoo', "stock": "23"}
+                {"id": "1", "category_name": "Shampoo packets", "status": "Active"},
+                {'id': '2', 'category_name': 'Shampoo bottles', 'status': 'InActive'}
             ];
             this.render(tableCollection);
             /*require('dataTables');
@@ -30,12 +33,12 @@ define(function (require) {
              {bSortable: !1, aTargets: [0, 6]}
              ], aaSorting: []});*/
             require('jquery-ui');
-            /*$("#add-item-form").dialog({
+            /*$("#item-categories-form").dialog({
              autoOpen: false,
              width: 380,
              modal: true,
              buttons: {
-             "Add Item": function () {
+             "Add Category": function () {
              $(this).dialog("close");
              }
              },
@@ -51,16 +54,17 @@ define(function (require) {
              });*/
         },
         render: function (tableCollection) {
-            $(this.$el).html(this.template({items: tableCollection, itemTemplate: this.itemTemplate}));
+            $(this.$el).html(this.template({categories: tableCollection, categoryTemplate: this.categoryTemplate}));
         },
-        addItem: function (e) {
+        addCategory: function (e) {
             console.log($(e));
-            $("#add-item-form").dialog({
+            //$("#item-categories-form").dialog("open");
+            $("#item-categories-form").dialog({
                 autoOpen: true,
                 width: 380,
                 modal: true,
                 buttons: {
-                    "Add Item": function () {
+                    "Add Category": function () {
                         $(this).dialog("close");
                     }
                 },
@@ -75,42 +79,12 @@ define(function (require) {
                 },
                 close: function (ev, ui) {
                     $(this).dialog('destroy');
-                    $("input[name=item_category]").autocomplete("destroy");
                 }
             });
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "BASIC",
-                "C",
-                "C++",
-                "Clojure",
-                "COBOL",
-                "ColdFusion",
-                "Erlang",
-                "Fortran",
-                "Groovy",
-                "Haskell",
-                "Java",
-                "JavaScript",
-                "Lisp",
-                "Perl",
-                "PHP",
-                "Python",
-                "Ruby",
-                "Scala",
-                "Scheme"
-            ];
-            $("input[name=item_category]").autocomplete({source: availableTags});
-            setTimeout(function () {
-                $('.ui-dialog').after($('.ui-autocomplete'));
-            }, 500);
             e.preventDefault();
         },
         cleanup: function () {
             var self = this;
-            console.log('Manage stock clean up');
             self.$el.off();
             self.undelegateEvents();
             $(self.el).empty();
