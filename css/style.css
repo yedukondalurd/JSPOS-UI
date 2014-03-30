@@ -14097,6 +14097,19 @@ table .checkbox {
     width: 210px;
     outline: none;
 }
-.hide-this{
+
+.ui-dialog form input.add-spinner {
+    width: 178px;
+}
+
+.hide-this {
     display: none;
+}
+
+.dataTables_wrapper .row {
+    margin: 0px;
+}
+
+.dataTables_filter label {
+    width: 200%;
 }

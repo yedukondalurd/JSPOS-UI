@@ -17,26 +17,32 @@
         <li><a href="#suppliers" class="item_supplier_button">Suppliers</a></li>
     </ol>
     <div class="main-content">
+        <div class="widget">
+            <h3 class="section-title first-title"><i class="icon-table"></i> Categories Table</h3>
 
-
-        <table class="datatable table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>
-                    <div class="checkbox"><input type="checkbox"/></div>
-                </th>
-                <th><%= categories.fields[0]%></th>
-                <th><%= categories.fields[1]%></th>
-                <th><%= categories.fields[2]%></th>
-                <th><%= categories.fields[3]%></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% _.each(categories.data,function(item){%>
-            <%= categoryTemplate(item) %>
-            <%});%>
-            </tbody>
-        </table>
+            <div class="widget-content-white glossed">
+                <div class="padded">
+                    <table class="datatable table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                <div class="checkbox"><input type="checkbox"/></div>
+                            </th>
+                            <th><%= categories.fields[0]%></th>
+                            <th><%= categories.fields[1]%></th>
+                            <th><%= categories.fields[2]%></th>
+                            <th><%= categories.fields[3]%></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% _.each(categories.data,function(item){%>
+                        <%= categoryTemplate(item) %>
+                        <%});%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div id="item-categories-form" title="Add Category" class="hide-this">
             <form action="" method="post">
                 <label for="item_category_name">Category Name:</label>

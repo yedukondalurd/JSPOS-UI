@@ -17,24 +17,32 @@
         <li><a href="#categories" class="item_category_button">Categories</a></li>
     </ol>
     <div class="main-content">
-        <table class="datatable table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>
-                    <div class="checkbox"><input type="checkbox"/></div>
-                </th>
-                <th><%= suppliers.fields[0]%></th>
-                <th><%= suppliers.fields[1]%></th>
-                <th><%= suppliers.fields[2]%></th>
-                <th><%= suppliers.fields[3]%></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% _.each(suppliers.data,function(item){%>
-            <%= supplierTemplate(item) %>
-            <%});%>
-            </tbody>
-        </table>
+        <div class="widget">
+            <h3 class="section-title first-title"><i class="icon-table"></i> Stock Table</h3>
+
+            <div class="widget-content-white glossed">
+                <div class="padded">
+                    <table class="datatable table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                <div class="checkbox"><input type="checkbox"/></div>
+                            </th>
+                            <th><%= suppliers.fields[0]%></th>
+                            <th><%= suppliers.fields[1]%></th>
+                            <th><%= suppliers.fields[2]%></th>
+                            <th><%= suppliers.fields[3]%></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% _.each(suppliers.data,function(item){%>
+                        <%= supplierTemplate(item) %>
+                        <%});%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div id="item-suppliers-form" title="Add Supplier" class="hide-this">
             <form action="" method="post">
                 <label for="item_supplier_name">Supplier Name:</label>

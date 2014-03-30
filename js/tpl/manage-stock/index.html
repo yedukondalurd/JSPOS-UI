@@ -17,28 +17,35 @@
         <li><a href="#suppliers" class="item_supplier_button">Suppliers</a></li>
     </ol>
     <div class="main-content">
+        <div class="widget">
+            <h3 class="section-title first-title"><i class="icon-table"></i> Stock Table</h3>
+            <div class="widget-content-white glossed">
+                <div class="padded">
+                    <table class="datatable table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                <div class="checkbox"><input type="checkbox"/></div>
+                            </th>
+                            <th><%= items.fields[0]%></th>
+                            <th><%= items.fields[1]%></th>
+                            <th><%= items.fields[2]%></th>
+                            <th><%= items.fields[3]%></th>
+                            <th><%= items.fields[4]%></th>
+                            <th><%= items.fields[5]%></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% _.each(items.data,function(item){%>
+                        <%= itemTemplate(item) %>
+                        <%});%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
-        <table class="datatable table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>
-                    <div class="checkbox"><input type="checkbox"/></div>
-                </th>
-                <th><%= items.fields[0]%></th>
-                <th><%= items.fields[1]%></th>
-                <th><%= items.fields[2]%></th>
-                <th><%= items.fields[3]%></th>
-                <th><%= items.fields[4]%></th>
-                <th><%= items.fields[5]%></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% _.each(items.data,function(item){%>
-            <%= itemTemplate(item) %>
-            <%});%>
-            </tbody>
-        </table>
         <div id="add-item-form" title="Add Item" class="hide-this">
             <form action="" method="post">
                 <label for="item_code">Item Code:</label>
@@ -53,6 +60,9 @@
                 <label for="item_supplier">Item Supplier:</label>
                 <input type="text" name="item_supplier" id="item_supplier"
                        class="text ui-widget-content ui-corner-all"/>
+                <label for="item_stock">Item Stock:</label>
+                <input type="text" name="item_stock" id="item_stock"
+                       class="text ui-widget-content ui-corner-all add-spinner"/>
             </form>
         </div>
 
